@@ -1,0 +1,6 @@
+@Home360_HostAddress = http://localhost:5260
+
+GET {{Home360_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
