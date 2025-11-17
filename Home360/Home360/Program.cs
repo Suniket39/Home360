@@ -1,3 +1,5 @@
+using Home360.API.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Custom Middleware
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<ShortCircuitingMiddleware>();
 
 app.UseHttpsRedirection();
 
