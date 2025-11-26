@@ -1,4 +1,5 @@
 using Home360.API.Core;
+using Home360.API.Core.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ if (app.Environment.IsDevelopment())
 
 //Custom Middleware
 app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<ErrorHandlerMiddleware>();    
 app.UseMiddleware<ShortCircuitingMiddleware>();
 
 app.UseHttpsRedirection();
