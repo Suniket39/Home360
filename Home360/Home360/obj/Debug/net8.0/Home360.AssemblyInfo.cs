@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Home360")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79365008075af659b304d92d99906a0b45885b0f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d0cd59f21f1f959816f2456dc791484a22dd173")]
 [assembly: System.Reflection.AssemblyProductAttribute("Home360")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Home360")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
