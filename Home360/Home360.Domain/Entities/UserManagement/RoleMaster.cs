@@ -1,4 +1,4 @@
-﻿namespace Home360.Domain.Entities
+﻿namespace Home360.Domain.Entities.UserManagement
 {
     public class RoleMaster : CommonEntity
     {
