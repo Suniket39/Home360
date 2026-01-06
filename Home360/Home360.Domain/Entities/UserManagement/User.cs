@@ -1,4 +1,6 @@
-﻿namespace Home360.Domain.Entities.UserManagement
+﻿using Home360.Domain.Entities.UserManagement;
+
+namespace Home360.Domain.Entities
 {
     public class User : CommonEntity
     {
