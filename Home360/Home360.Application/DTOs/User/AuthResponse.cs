@@ -8,6 +8,6 @@ namespace Home360.Application
         public string RefreshToken { get; set; } = string.Empty;
         public DateTime AccessTokenExpirations { get; set; }
         public DateTime RefreshTokenExpiration { get; set; }
-        public UserResponse User { get; set; } = new();
+        public UserResponse User { get; set; } = new UserResponse();
     }
 }
