@@ -1,5 +1,5 @@
 ﻿using Home360.Application;
-using Home360.Application.Interfaces;
+using Home360.Application.Interfaces.Security;
 using Home360.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -105,7 +105,7 @@ namespace Home360.Infrastructure.Repositories
                 if(validatedToken is not JwtSecurityToken jwtToken ||
                    !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    _logger.LogWarning("Invalid token algorithm");
+                    _logger.LogWarning("Token validation failed: Invalid token algorithm");
                     return null;
                 }
                 return principal;
