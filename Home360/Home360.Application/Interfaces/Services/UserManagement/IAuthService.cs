@@ -1,6 +1,8 @@
 ﻿namespace Home360.Application.Interfaces.Services
 {
-    internal interface IAuthService
+    public interface IAuthService
     {
+        Task<AuthResponse> AuthenticateAsync(LoginRequest loginRequest);
+        Task<string> GenerateTokenAsync(string userId, string email, string role);
     }
 }
