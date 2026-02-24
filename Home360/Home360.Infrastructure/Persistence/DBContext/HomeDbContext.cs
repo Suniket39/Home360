@@ -1,7 +1,7 @@
 ﻿using Home360.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Home360.Infrastructure.Persistence.DBContext
+namespace Home360.Infrastructure.Persistence
 {
     public class HomeDbContext : DbContext
     {
