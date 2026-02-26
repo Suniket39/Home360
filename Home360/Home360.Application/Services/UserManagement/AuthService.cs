@@ -11,6 +11,14 @@ namespace Home360.Application.Services
 
         public Task<AuthResponse> AuthenticateAsync(LoginRequest loginRequest)
         {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
             throw new NotImplementedException();
         }
 
