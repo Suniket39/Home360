@@ -11,6 +11,7 @@ namespace Home360.Application.Mappings
             #region 
             // User Management Mappings
             CreateMap<UserRquest, User>();
+            CreateMap<User, UserResponse>().ReverseMap();
             #endregion
         }
     }

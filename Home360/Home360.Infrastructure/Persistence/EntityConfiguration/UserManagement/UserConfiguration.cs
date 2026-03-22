@@ -1,4 +1,4 @@
-﻿using Home360.Domain.Entities.UserManagement;
+﻿using Home360.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

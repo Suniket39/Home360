@@ -1,6 +1,7 @@
 ﻿using Home360.Application;
 using Home360.Application.Interfaces;
 using Home360.Domain.Entities;
+using Home360.Infrastructure.Persistence;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,11 +16,13 @@ namespace Home360.Infrastructure.Repositories
     {
         private readonly JwtSettings _jwtSettings;
         private readonly ILogger<JwtService> _logger;
+        private readonly IHomeContextFactory _homeContextFactory;
 
-        public JwtService(IOptions<JwtSettings> jwtSettings, ILogger<JwtService> logger)
+        public JwtService(IOptions<JwtSettings> jwtSettings, ILogger<JwtService> logger, IHomeContextFactory homeContextFactory)
         {
             _jwtSettings = jwtSettings.Value;
             _logger = logger;
+            _homeContextFactory = homeContextFactory;
         }
 
         public string GenerateAccessToken(User user)
@@ -116,5 +119,29 @@ namespace Home360.Infrastructure.Repositories
                 throw;
             }
         }
+
+        public async Task<bool> SaveRefreshTokenAsync(string token, int userId)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+                var refreshToken = new RefreshToken
+                {
+                    Token = token,
+                    UserId = userId,
+                    Expires = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDays),
+                    Created = DateTime.UtcNow
+                };
+
+                context.RefreshToken.Add(refreshToken);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

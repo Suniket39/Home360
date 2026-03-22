@@ -13,7 +13,7 @@ namespace Home360.API.Core.Middleware
         }
 
         public async Task Invoke(HttpContext context)
-        {
+        {   
             try
             {
                 await _next(context);

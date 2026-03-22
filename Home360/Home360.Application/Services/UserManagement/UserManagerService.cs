@@ -4,8 +4,9 @@ using Home360.Application.Interfaces.Repositories;
 using Home360.Application.Interfaces.Services;
 using Home360.Domain.Common;
 using Home360.Domain.Entities;
+using BC = BCrypt.Net.BCrypt;
 
-namespace Home360.Application.Services.UserManagement
+namespace Home360.Application.Services
 {
     public class UserManagerService : IUserManagerService
     {
@@ -26,10 +27,22 @@ namespace Home360.Application.Services.UserManagement
             // ToDo -  Write Same for MobileNo and Email
 
             var user = _mapper.Map<User>(userRequest);
+            user.PasswordHash = BC.HashPassword(user.PasswordHash);
+            user.IsActive = true;
             user.CreatedDate = DateTimeFormatter.GetISTTime(DateTime.Now);
 
             bool userAdded = await _userManagerRepository.RegisterUserAsync(user);
             return userAdded ? "User Registered Successfully" : "User Registration Failed";
+        }
+
+        public async Task<UserResponse> ValidateCredentialsAsync(LoginRequest loginRequest)
+        {
+            var userAccount = await _userManagerRepository.ActiveUserExistsAsync(loginRequest.Username);
+
+            if (userAccount == null || BC.Verify(loginRequest.Username, userAccount.PasswordHash))
+                throw new UnauthorizedAccessException("Invalid username or password.");
+
+            return _mapper.Map<UserResponse>(userAccount);
         }
 
         public async Task<List<UserResponse>> GetAllUsersAsync()
