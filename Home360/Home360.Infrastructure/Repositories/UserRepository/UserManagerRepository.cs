@@ -2,7 +2,6 @@
 using Home360.Domain.Entities;
 using Home360.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using BC = BCrypt.Net.BCrypt;
 
 namespace Home360.Infrastructure.Repositories
 {
@@ -20,8 +19,6 @@ namespace Home360.Infrastructure.Repositories
             try
             {
                 using HomeDbContext context = _homeContextFactory.CreateDbContext();
-                user.PasswordHash = BC.HashPassword(user.PasswordHash);
-                user.IsActive = true;
                 context.UserManager.Add(user);
                 await context.SaveChangesAsync();
                 return true;
@@ -66,6 +63,22 @@ namespace Home360.Infrastructure.Repositories
             {
                 throw new NotImplementedException();
             }
-        }   
+        }
+
+        public async Task<User> ActiveUserExistsAsync(string userName)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+
+                var result = await context.UserManager.FirstOrDefaultAsync(x => x.Username == userName &&
+                                                        x.IsActive);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

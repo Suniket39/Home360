@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Home360.Application\Home360.Application.csproj" />
+	<ProjectReference Include="..\Home360.Infrastructure\Home360.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
