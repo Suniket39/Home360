@@ -1,4 +1,5 @@
 ﻿using Home360.Domain.Entities;
+using Home360.Infrastructure.Persistence.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Home360.Infrastructure.Persistence
@@ -17,13 +18,25 @@ namespace Home360.Infrastructure.Persistence
 
         #endregion
 
+        #region Expense Tracker
+        public virtual DbSet<ExpenseCategory> ExpenseCategories { get; set; }
+        public virtual DbSet<ExpenseTypes> ExpenseTypes { get; set; }
+        public virtual DbSet<ExpenseTransaction> ExpenseTransactions { get; set; }
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            #region
-            // User Management Configurations
+            #region User Management Configurations
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            #endregion
+
+            #region Expense tracker
+            modelBuilder.ApplyConfiguration(new ExpenseCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpenseTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpenseTransactionConfiguration());
             #endregion
         }
     }
