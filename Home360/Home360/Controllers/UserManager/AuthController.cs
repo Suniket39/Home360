@@ -1,5 +1,6 @@
 ﻿using Home360.API.Core.Auth;
 using Home360.Application;
+using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,20 @@ namespace Home360.API.Controllers.UserManager
             return Ok(res);
         }
 
+        [HttpPost]
+        [Route("refresh-token")]
+        public async Task<IActionResult> RefreshTokenAsyn([FromBody] RevokeTokenRequest request)
+        {
+            if (string.IsNullOrEmpty(Request.Cookies["refreshToken"]))
+                return BadRequest("Refresh token is missing.");
 
+            var response = await _authService.RefreshTokenAsync(request.Token);
+            if (response == null) return Unauthorized("Invalid refresh token.");
+
+            return Ok();
+        }
+
+        #region Private Methods
         private void SetTokenCookie(string token)
         {
             var cookieOptions = new CookieOptions
@@ -44,5 +58,7 @@ namespace Home360.API.Controllers.UserManager
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
+
+        #endregion
     }
 }
