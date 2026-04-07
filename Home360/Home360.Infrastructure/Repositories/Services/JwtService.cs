@@ -2,6 +2,7 @@
 using Home360.Application.Interfaces;
 using Home360.Domain.Entities;
 using Home360.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -143,5 +144,41 @@ namespace Home360.Infrastructure.Repositories
             }
         }
 
+        public async Task<User> GetUserOnTokenAsync(string token)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+                var userAccount = await context.UserManager
+                                        .Include(x => x.RefreshTokens)
+                                        .FirstOrDefaultAsync(x => x.RefreshTokens.Any(t => t.Token == token));
+
+                if (userAccount == null) return null;
+                return userAccount;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> RevokeRefreshTokenAsync(string token)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+                var refreshToken = await context.RefreshToken.FirstOrDefaultAsync(x => x.Token == token);
+                if (refreshToken == null) return false;
+                context.RefreshToken.Remove(refreshToken);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

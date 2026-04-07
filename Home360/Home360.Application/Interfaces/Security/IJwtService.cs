@@ -7,5 +7,7 @@ namespace Home360.Application.Interfaces
         string GenerateAccessToken(User user);
         string GenerateRefreshToken();
         Task<bool> SaveRefreshTokenAsync(string token, int userId);
+        Task<User> GetUserOnTokenAsync(string token);
+        Task<bool> RevokeRefreshTokenAsync(string token);
     }
 }

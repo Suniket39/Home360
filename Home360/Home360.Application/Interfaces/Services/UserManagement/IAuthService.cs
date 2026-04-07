@@ -4,5 +4,6 @@
     {
         Task<AuthResponse> AuthenticateAsync(LoginRequest loginRequest);
         Task<string> GenerateTokenAsync(string userId, string email, string role);
+        Task<AuthResponse> RefreshTokenAsync(string refreshToken);
     }
 }

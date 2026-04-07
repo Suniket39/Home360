@@ -21,7 +21,7 @@ namespace Home360.Domain.Entities
         public DateTime? PasswordReset { get; set; }
 
         public RoleMaster? Role { get; set; }
-        public virtual ICollection<RefreshToken>? RefreshTokens { get; set; } = new List<RefreshToken>();
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
         public bool OwnsToken(string token) => RefreshTokens?.Any(rt => rt.Token == token) == true;
     }
