@@ -42,8 +42,19 @@ namespace Home360.API.Controllers.UserManager
 
             var response = await _authService.RefreshTokenAsync(request.Token);
             if (response == null) return Unauthorized("Invalid refresh token.");
+            SetTokenCookie(response.RefreshToken);
+            return Ok(response);
+        }
 
-            return Ok();
+        [HttpPost]
+        [Route("revoke-token")]
+        public async Task<IActionResult> RevokeTokenAsync([FromBody] RevokeTokenRequest request)
+        {
+            if (string.IsNullOrEmpty(Request.Cookies["refreshToken"]))
+                return BadRequest("Refresh token is missing.");
+            var result = await _authService.RevokeTokenAsync(request.Token);
+            if (result == null) return NotFound("Token not found.");
+            return Ok(result);
         }
 
         #region Private Methods
