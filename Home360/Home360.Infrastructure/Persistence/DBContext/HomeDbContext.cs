@@ -26,6 +26,7 @@ namespace Home360.Infrastructure.Persistence
 
         #endregion
 
+        [System.Obsolete]
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
