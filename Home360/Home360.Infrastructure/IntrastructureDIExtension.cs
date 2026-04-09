@@ -14,7 +14,8 @@ namespace Home360.Infrastructure
             services.AddScoped<IHomeContextFactory, HomeContextFactory>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IUserManagerRepository, UserManagerRepository>();
-
+            services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+            services.AddScoped<IExpenseTransactionRepository, ExpenseTransactionRepository>();
             return services;
         }
     }
