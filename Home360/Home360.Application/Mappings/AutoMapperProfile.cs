@@ -13,6 +13,19 @@ namespace Home360.Application.Mappings
             CreateMap<UserRquest, User>();
             CreateMap<User, UserResponse>().ReverseMap();
             #endregion
+
+            #region 
+            // Expense Tracker Mappings
+            CreateMap<ExpenseCategoryRequest, ExpenseCategory>();
+            CreateMap<ExpenseCategory, ExpenseCategoryResponse>();
+
+            CreateMap<ExpenseTypeRequest, ExpenseTypes>();
+            CreateMap<ExpenseTypes, ExpenseTypeResponse>();
+
+            CreateMap<ExpenseTransactionRequest, ExpenseTransaction>();
+            CreateMap<ExpenseTransaction, ExpenseTransactionResponse>();
+
+            #endregion
         }
     }
 }

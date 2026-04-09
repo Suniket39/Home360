@@ -32,6 +32,7 @@ namespace Home360.Infrastructure.Persistence
 
             #region User Management Configurations
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleMasterConfiguration());
             #endregion
 
             #region Expense tracker
