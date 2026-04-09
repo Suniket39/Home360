@@ -1,8 +1,11 @@
 using Home360.API.Core;
 using Home360.API.Core.Extension;
 using Home360.API.Core.Middleware;
-using Home360.Infrastructure;
 using Home360.Application;
+using Home360.Infrastructure;
+using Home360.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddApi();
+ConfigureDbContext(builder.Services);
 
 builder.Services.AddControllers();
 
@@ -51,3 +55,10 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 
 app.Run();
+
+
+void ConfigureDbContext(IServiceCollection services)
+{
+    services.AddDbContext<HomeDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DataSQLContext")));
+}

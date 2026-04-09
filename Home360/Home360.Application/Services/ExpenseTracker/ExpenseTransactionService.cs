@@ -18,7 +18,6 @@ namespace Home360.Application.Services
 
         public async Task<string> RegisterTransactionAsync(ExpenseTransactionRequest tranRequest)
         {
-
             var transaction = _mapper.Map<ExpenseTransaction>(tranRequest);
 
             bool categoryAdded = await _transactionRepository.RegisterTransactionAsync(transaction);
