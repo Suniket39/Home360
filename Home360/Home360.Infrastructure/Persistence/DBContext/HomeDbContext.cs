@@ -16,6 +16,7 @@ namespace Home360.Infrastructure.Persistence
         #region User Manager
         public virtual DbSet<User> UserManager { get; set; }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
+        public virtual DbSet<RoleMaster> RoleMaster { get; set; }
 
         #endregion
 

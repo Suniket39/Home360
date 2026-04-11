@@ -3,15 +3,12 @@ using Home360.API.Core.Extension;
 using Home360.API.Core.Middleware;
 using Home360.Application;
 using Home360.Infrastructure;
-using Home360.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add JWT Settings from appsettings.json
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfile>());
 
 // Register DIs here
 builder.Services.AddApplication();

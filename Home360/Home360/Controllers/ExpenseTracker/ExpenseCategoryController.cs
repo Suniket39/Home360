@@ -1,14 +1,13 @@
 ﻿using Home360.API.Core.Auth;
 using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Home360.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ExpenseCategoryController : ControllerBase
     {
         private readonly IExpenseCategoryService _expenseCategoryService;

@@ -6,7 +6,7 @@ namespace Home360.Application.Interfaces.Services
     public interface IUserManagerService
     {
         //Task<bool> UserExistsAsync(string userName, string mobileNo, string email);
-        Task<string> RegisterUserAsync(UserRquest user);
+        Task<string> RegisterUserAsync(UserRequest user);
         Task<UserResponse> ValidateCredentialsAsync(LoginRequest loginRequest);
         Task<List<UserResponse>> GetAllUsersAsync();
     }

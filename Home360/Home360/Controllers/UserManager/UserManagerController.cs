@@ -19,7 +19,7 @@ namespace Home360.API.Controllers
 
         [HttpPost]
         [Route("registerUser")]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRquest userRequest)
+        public async Task<IActionResult> RegisterUser([FromBody] UserRequest userRequest)
         {
             if (!ModelState.IsValid)
             {

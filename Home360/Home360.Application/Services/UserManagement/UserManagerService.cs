@@ -12,6 +12,7 @@ namespace Home360.Application.Services
     {
         private readonly IUserManagerRepository _userManagerRepository;
         private readonly IMapper _mapper;
+
         public UserManagerService(IUserManagerRepository userManagerRepository,
             IMapper mapper)
         {
@@ -19,20 +20,31 @@ namespace Home360.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<string> RegisterUserAsync(UserRquest userRequest)
+        public async Task<string> RegisterUserAsync(UserRequest userRequest)
         {
-            bool userExists = await _userManagerRepository.UserNameExistsAsync(userRequest.Username);
-            if(userExists) return "User Name already exists";
+            try
+            {
+                bool userExists = await _userManagerRepository.UserNameExistsAsync(userRequest.Username);
+                if (userExists) return "User Name already exists";
 
-            // ToDo -  Write Same for MobileNo and Email
+                if (userRequest.Password != userRequest.ConfirmPassword)
+                    return "Passwords do not match";
 
-            var user = _mapper.Map<User>(userRequest);
-            user.PasswordHash = BC.HashPassword(user.PasswordHash);
-            user.IsActive = true;
-            user.CreatedDate = DateTimeFormatter.GetISTTime(DateTime.Now);
+                // ToDo -  Write Same for MobileNo and Email
 
-            bool userAdded = await _userManagerRepository.RegisterUserAsync(user);
-            return userAdded ? "User Registered Successfully" : "User Registration Failed";
+                var user = _mapper.Map<User>(userRequest);
+                user.PasswordHash = BC.HashPassword(userRequest.Password);
+                user.IsActive = true;
+                user.CreatedDate = DateTimeFormatter.GetISTTime(DateTime.Now);
+
+                bool userAdded = await _userManagerRepository.RegisterUserAsync(user);
+                return userAdded ? "User Registered Successfully" : "User Registration Failed";
+            }
+            catch (Exception ex)
+            {
+                //Add Logging here
+                return "User Registration Failed";
+            }
         }
 
         public async Task<UserResponse> ValidateCredentialsAsync(LoginRequest loginRequest)
