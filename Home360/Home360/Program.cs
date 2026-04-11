@@ -15,9 +15,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Register DIs here
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApi();
-ConfigureDbContext(builder.Services);
 
 builder.Services.AddControllers();
 
@@ -55,10 +54,3 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 
 app.Run();
-
-
-void ConfigureDbContext(IServiceCollection services)
-{
-    services.AddDbContext<HomeDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DataSQLContext")));
-}

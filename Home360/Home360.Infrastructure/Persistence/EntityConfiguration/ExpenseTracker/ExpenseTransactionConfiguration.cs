@@ -10,7 +10,7 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
         {
             builder.HasKey(x => x.TransactionId);
             builder.Property(x => x.TransactionId).ValueGeneratedOnAdd();
-            builder.Property(x => x.Amount).IsRequired();
+            builder.Property(x => x.Amount).IsRequired().HasPrecision(10, 4);
             builder.Property(x => x.ExpenseName).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(250);
             builder.Property(x => x.TransactionDate).IsRequired();
@@ -20,16 +20,20 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
             builder.HasOne(x => x.User)
                    .WithMany()
                    .HasForeignKey(x => x.UserId)
-                   .IsRequired();
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.ExpenseCategory)
                    .WithMany(x => x.ExpenseTransactions)
                    .HasForeignKey(x => x.ExpenseCategoryId)
-                   .IsRequired();
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasOne(x => x.ExpenseCategoryType)
                    .WithMany(x => x.ExpenseTransactions)
                    .HasForeignKey(x => x.ExpenseCategoryTypeId)
-                   .IsRequired();
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

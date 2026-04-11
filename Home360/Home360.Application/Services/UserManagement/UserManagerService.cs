@@ -21,7 +21,7 @@ namespace Home360.Application.Services
 
         public async Task<string> RegisterUserAsync(UserRquest userRequest)
         {
-            bool userExists = await _userManagerRepository.UserNameExistsAsync(userRequest.UserName);
+            bool userExists = await _userManagerRepository.UserNameExistsAsync(userRequest.Username);
             if(userExists) return "User Name already exists";
 
             // ToDo -  Write Same for MobileNo and Email
