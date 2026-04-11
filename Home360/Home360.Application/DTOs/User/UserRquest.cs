@@ -8,7 +8,7 @@ namespace Home360.Application.DTOs
 
         [Required(ErrorMessage = "User Name is required!")]
         [MinLength(3)]
-        public string UserName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "First Name is required!")]
         [MinLength(3)]
