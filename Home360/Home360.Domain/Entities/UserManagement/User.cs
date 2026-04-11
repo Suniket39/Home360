@@ -1,4 +1,4 @@
-﻿using Home360.Domain.Entities.UserManagement;
+﻿using Home360.Domain.Entities;
 
 namespace Home360.Domain.Entities
 {
@@ -22,7 +22,6 @@ namespace Home360.Domain.Entities
 
         public RoleMaster? Role { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
-
         public bool OwnsToken(string token) => RefreshTokens?.Any(rt => rt.Token == token) == true;
     }
 }

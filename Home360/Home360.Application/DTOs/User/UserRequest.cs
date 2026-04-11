@@ -2,7 +2,7 @@
 
 namespace Home360.Application.DTOs
 {
-    public class UserRquest
+    public class UserRequest : CommonEntityModel
     {
         public int UserId { get; set; }  
 
@@ -31,6 +31,8 @@ namespace Home360.Application.DTOs
 
         [MinLength(3)]
         public string? MobileNumber { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public int RoleId { get; set; }
 
     }
 }

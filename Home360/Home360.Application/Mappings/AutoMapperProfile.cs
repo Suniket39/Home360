@@ -2,7 +2,7 @@
 using Home360.Application.DTOs;
 using Home360.Domain.Entities;
 
-namespace Home360.Application.Mappings
+namespace Home360.Application
 {
     public class AutoMapperProfile : Profile
     {
@@ -10,8 +10,12 @@ namespace Home360.Application.Mappings
         {
             #region 
             // User Management Mappings
-            CreateMap<UserRquest, User>();
+            CreateMap<UserRequest, User>();
             CreateMap<User, UserResponse>().ReverseMap();
+
+            //Role Master
+            CreateMap<RoleMasterRequest, RoleMaster>();
+            CreateMap<RoleMaster, RoleMasterResponse>();
             #endregion
 
             #region 

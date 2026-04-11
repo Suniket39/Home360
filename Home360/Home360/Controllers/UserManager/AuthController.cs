@@ -1,14 +1,14 @@
-﻿using Home360.API.Core.Auth;
-using Home360.Application;
+﻿using Home360.Application;
 using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Home360.API.Controllers.UserManager
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
