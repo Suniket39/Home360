@@ -1,5 +1,6 @@
 ﻿using Home360.Domain.Entities;
 using Home360.Infrastructure.Persistence.EntityConfiguration;
+using Home360.Infrastructure.Persistence.Helper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Home360.Infrastructure.Persistence
@@ -17,6 +18,8 @@ namespace Home360.Infrastructure.Persistence
         public virtual DbSet<User> UserManager { get; set; }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
         public virtual DbSet<RoleMaster> RoleMaster { get; set; }
+        public virtual DbSet<RoleAccessManager> RoleAccessManager { get; set; }
+        public virtual DbSet<ScreenMaster> AccessMaster { get; set; }
 
         #endregion
 
@@ -35,6 +38,8 @@ namespace Home360.Infrastructure.Persistence
             #region User Management Configurations
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleMasterConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleAccessManagerConfiguration());
+            modelBuilder.ApplyConfiguration(new ScreenMasterConfiguration());
             #endregion
 
             #region Expense tracker
@@ -42,6 +47,12 @@ namespace Home360.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new ExpenseTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ExpenseTransactionConfiguration());
             #endregion
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellation = default)
+        {
+            AuditHelper.SetAuditFields(ChangeTracker, "Demo");
+            return await base.SaveChangesAsync(cancellation);
         }
     }
 }

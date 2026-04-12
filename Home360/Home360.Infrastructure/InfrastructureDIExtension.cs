@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Home360.Infrastructure
 {
-    public static class IntrastructureDIExtension
+    public static class InfrastructureDIExtension
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
             IConfiguration configuration)
