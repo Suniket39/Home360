@@ -12,6 +12,7 @@ namespace Home360.Application
             services.AddScoped<IUserManagerService, UserManagerService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IRoleMasterService, RoleMasterService>();
+            services.AddScoped<IScreenMasterService, ScreenMasterService>();
             services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             services.AddScoped<IExpenseTransactionService, ExpenseTransactionService>();
             return services;

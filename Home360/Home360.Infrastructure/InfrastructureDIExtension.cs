@@ -21,6 +21,7 @@ namespace Home360.Infrastructure
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IUserManagerRepository, UserManagerRepository>();
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
+            services.AddScoped<IScreenMasterRepository, ScreenMasterRepository>();
             services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
             services.AddScoped<IExpenseTransactionRepository, ExpenseTransactionRepository>();
             return services;

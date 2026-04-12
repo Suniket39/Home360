@@ -8,7 +8,7 @@ namespace Home360.Application
     {
         public AutoMapperProfile()
         {
-            #region 
+            #region Admin
             // User Management Mappings
             CreateMap<UserRequest, User>();
             CreateMap<User, UserResponse>().ReverseMap();
@@ -16,9 +16,13 @@ namespace Home360.Application
             //Role Master
             CreateMap<RoleMasterRequest, RoleMaster>();
             CreateMap<RoleMaster, RoleMasterResponse>();
+
+            //Screen Master
+            CreateMap<ScreenMasterRequest, ScreenMaster>();
+            CreateMap<ScreenMaster, ScreenMasterResponse>();
             #endregion
 
-            #region 
+            #region Expense Tracker
             // Expense Tracker Mappings
             CreateMap<ExpenseCategoryRequest, ExpenseCategory>();
             CreateMap<ExpenseCategory, ExpenseCategoryResponse>();

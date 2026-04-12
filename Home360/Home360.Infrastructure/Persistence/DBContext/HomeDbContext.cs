@@ -19,7 +19,7 @@ namespace Home360.Infrastructure.Persistence
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
         public virtual DbSet<RoleMaster> RoleMaster { get; set; }
         public virtual DbSet<RoleAccessManager> RoleAccessManager { get; set; }
-        public virtual DbSet<ScreenMaster> AccessMaster { get; set; }
+        public virtual DbSet<ScreenMaster> ScreenMaster { get; set; }
 
         #endregion
 
