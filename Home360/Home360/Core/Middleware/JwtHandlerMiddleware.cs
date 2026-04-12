@@ -46,13 +46,13 @@ namespace Home360.API.Core.Middleware
                 }, out SecurityToken validatedToken);                    
                 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
-                var userName = jwtToken.Claims.First(x => x.Type == "UserName").Value;
-                var userAccess = jwtToken.Claims.First(x => x.Type == "UerAccess").Value;
+                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
+                var userName = jwtToken.Claims.First(x => x.Type == "unique_name").Value;
+                ///var userAccess = jwtToken.Claims.First(x => x.Type == "UerAccess").Value;
 
                 context.Session.SetInt32("UserId", userId);
                 context.Session.SetString("UserName", userName);
-                context.Session.SetString("UserAccess", userAccess);
+                ///context.Session.SetString("UserAccess", userAccess);
             }
             catch(Exception ex) 
             {

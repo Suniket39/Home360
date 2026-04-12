@@ -6,5 +6,6 @@
         public required string RoleName { get; set; }
         public string? Description { get; set; }
         public ICollection<User>? Users { get; set; }
+        public virtual ICollection<RoleAccessManager> RoleAccessManager { get; set; }
     }
 }
