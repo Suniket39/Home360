@@ -22,11 +22,8 @@ namespace Home360.API.Controllers
         public async Task<IActionResult> RegisterScreenAsync(ScreenMasterRequest roleRequest)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest("Not a valid Model");
-            }
 
-            // TODO common method for adding common entity model data
             string result = await _screenMasterService.RegisterScreenAsync(roleRequest);
             return Ok(result);
         }
