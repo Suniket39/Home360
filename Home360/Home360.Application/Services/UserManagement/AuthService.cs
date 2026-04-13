@@ -29,7 +29,7 @@ namespace Home360.Application.Services
                 if (userValid == null)
                     throw new UnauthorizedAccessException("Invalid username or password.");
 
-                var accessToken = _jwtService.GenerateAccessToken(_mapper.Map<User>(userValid)); //JWT Token
+                var accessToken = await _jwtService.GenerateAccessToken(_mapper.Map<User>(userValid)); //JWT Token
                 var refreshToken = _jwtService.GenerateRefreshToken();
 
                 //Add refreshToken
@@ -67,7 +67,7 @@ namespace Home360.Application.Services
             var oldToken = user.RefreshTokens.SingleOrDefault(rt => rt.Token == refreshToken);
             if (!oldToken.IsActive) return null;
 
-            var newAccessToken = _jwtService.GenerateAccessToken(user);
+            var newAccessToken =await _jwtService.GenerateAccessToken(user);
             var newRefreshToken = _jwtService.GenerateRefreshToken();
             // Save the new refresh token and invalidate the old one
             await _jwtService.SaveRefreshTokenAsync(newRefreshToken, user.UserId);
