@@ -11,7 +11,5 @@ namespace Home360.Application.DTOs
         public bool CanCreate { get; set; }
         public bool CanUpdate { get; set; }
         public bool CanDeactivate { get; set; }
-        public RoleMaster RoleMaster { get; set; }
-        public ScreenMaster ScreenMaster { get; set; }
     }
 }
