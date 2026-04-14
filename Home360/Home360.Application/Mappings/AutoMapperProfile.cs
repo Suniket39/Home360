@@ -20,6 +20,8 @@ namespace Home360.Application
             //Screen Master
             CreateMap<ScreenMasterRequest, ScreenMaster>();
             CreateMap<ScreenMaster, ScreenMasterResponse>();
+            CreateMap<RoleAccessManagerRequest, RoleAccessManager>();
+            CreateMap<RoleAccessManager, RoleAccessManagerResponse>();
             #endregion
 
             #region Expense Tracker

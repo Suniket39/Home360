@@ -1,7 +1,7 @@
-﻿using Home360.API.Core.Auth;
+﻿using Microsoft.AspNetCore.Mvc;
+using Home360.API.Core.Auth;
 using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Home360.API.Controllers
 {

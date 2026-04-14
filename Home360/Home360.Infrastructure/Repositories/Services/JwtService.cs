@@ -39,7 +39,7 @@ namespace Home360.Infrastructure.Repositories
                 new (ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new (ClaimTypes.Name, user.Username),
                 new (ClaimTypes.Email, user.Email),
-                //new Claim("UserAccess", JsonSerializer.Serialize(userSpecificMenu.Item2),
+                new Claim("UserAccess", JsonSerializer.Serialize(userSpecificMenu.Item1)),
                 new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new (JwtRegisteredClaimNames.Iat,
                      new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
