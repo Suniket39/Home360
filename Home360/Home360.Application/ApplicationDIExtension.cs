@@ -16,6 +16,9 @@ namespace Home360.Application
             services.AddScoped<IRoleAccessManagerService, RoleAccessManagerService>();
             services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             services.AddScoped<IExpenseTransactionService, ExpenseTransactionService>();
+
+            services.AddScoped<IGroceryItemService, GroceryItemService>();
+            services.AddScoped<IGroceryInventoryService, GroceryInventoryService>();
             return services;
         }
     }
