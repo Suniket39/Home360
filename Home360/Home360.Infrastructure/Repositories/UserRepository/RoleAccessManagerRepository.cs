@@ -47,5 +47,11 @@ namespace Home360.Infrastructure.Repositories
                 return false;
             }
         }
+
+        public async Task<List<RoleAccessManager>> GetRoleAccessOnRoleIdAsync(int roleId)
+        {
+            using HomeDbContext context = _homeContextFactory.CreateDbContext();
+            return await context.RoleAccessManager.Where(x => x.RoleId == roleId).ToListAsync();
+        }
     }
 }

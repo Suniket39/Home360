@@ -33,13 +33,13 @@ namespace Home360.Infrastructure.Repositories
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey); // secret key from appsettings.json
 
-            var userSpecificMenu = await GetUserRoleSpecificMenuAccess(user.RoleId);
+            //var userSpecificMenu = await GetUserRoleSpecificMenuAccess(user.RoleId);
             var claims = new List<Claim>
             {
                 new (ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new (ClaimTypes.Name, user.Username),
                 new (ClaimTypes.Email, user.Email),
-                new Claim("UserAccess", JsonSerializer.Serialize(userSpecificMenu.Item1)),
+                //new Claim("UserAccess",  JsonSerializer.Serialize(userSpecificMenu.Item1)),
                 new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new (JwtRegisteredClaimNames.Iat,
                      new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
@@ -184,7 +184,9 @@ namespace Home360.Infrastructure.Repositories
             }
         }
 
-        private async Task<(List<UserScreenAccessDto>, List<MenuAccessDto>)> GetUserRoleSpecificMenuAccess(int roleId)
+
+
+        public async Task<(List<UserScreenAccessDto>, List<MenuAccessDto>)> GetUserRoleSpecificMenuAccess(int roleId)
         {
             try
             {

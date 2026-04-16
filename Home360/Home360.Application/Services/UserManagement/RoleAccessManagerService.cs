@@ -34,6 +34,11 @@ namespace Home360.Application.Services
             var roles = _mapper.Map<List<RoleAccessManagerResponse>>(await _roleAccessRepository.GetAllRoleAccessAsync());
             return roles;
         }
+
+        public async Task<List<RoleAccessManagerResponse>> GetRoleAccessOnRoleIdAsync(int roleId)
+        {
+            return _mapper.Map<List<RoleAccessManagerResponse>>(await _roleAccessRepository.GetRoleAccessOnRoleIdAsync(roleId));
+        }
     }
 }
 

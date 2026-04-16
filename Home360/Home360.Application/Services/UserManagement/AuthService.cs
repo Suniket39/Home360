@@ -12,13 +12,20 @@ namespace Home360.Application.Services
         private readonly IUserManagerService _userManagerService;
         private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
+        private readonly IRoleAccessManagerService _roleAccessManagerService;
+        private readonly IScreenMasterService _screenMasterService;
+
         public AuthService(IUserManagerService userManagerService,
                             IJwtService jwtService,
-                            IMapper mapper)
+                            IMapper mapper,
+                            IRoleAccessManagerService roleAccessManagerService,
+                            IScreenMasterService screenMasterService)
         {
             _userManagerService = userManagerService;
             _jwtService = jwtService;
             _mapper = mapper;
+            _roleAccessManagerService = roleAccessManagerService;
+            _screenMasterService = screenMasterService;
         }
 
         public async Task<AuthResponse> AuthenticateAsync(LoginRequest loginRequest)
@@ -32,6 +39,22 @@ namespace Home360.Application.Services
                 var accessToken = await _jwtService.GenerateAccessToken(_mapper.Map<User>(userValid)); //JWT Token
                 var refreshToken = _jwtService.GenerateRefreshToken();
 
+                //Call here UserScreenAccessMenu and send response
+                var roleAccess  = await _roleAccessManagerService.GetRoleAccessOnRoleIdAsync(userValid.RoleId);
+                var screenMaster = await _screenMasterService.GetAllScreensAsync();// add Cache
+                foreach (var access in roleAccess)
+                { 
+                    var screen = screenMaster.FirstOrDefault(s => s.ScreenId == access.ScreenId);
+                    if (screen != null)
+                    {
+                        var menuDto = new MenuAccessDto();
+                        menuDto.SceenId = screen.ScreenId;
+                        menuDto.ScreenCode = screen.ScreenCode;
+                        menuDto.MenuName = screen.MenuName;
+                        menuDto.MenuIcon = screen.MenuIcon;
+                        menuDto.RoutingUrl = screen.RoutingURL;
+                    }   
+                }
                 //Add refreshToken
                 await _jwtService.SaveRefreshTokenAsync(refreshToken, userValid.UserId);
 

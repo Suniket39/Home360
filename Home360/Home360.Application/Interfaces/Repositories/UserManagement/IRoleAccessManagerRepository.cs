@@ -7,5 +7,6 @@ namespace Home360.Application.Interfaces.Repositories
         Task<bool> RegisterRoleAccessManagerAsync(RoleAccessManager screen);
         Task<List<RoleAccessManager>> GetAllRoleAccessAsync();
         //Task<bool> ScreenCodeExistsAsync(string screenCode);
+        Task<List<RoleAccessManager>> GetRoleAccessOnRoleIdAsync(int roleId);
     }
 }
