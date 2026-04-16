@@ -6,5 +6,6 @@ namespace Home360.Application.Interfaces.Services
     {
         Task<string> RegisterRoleAccessAsync(RoleAccessManagerRequest role);
         Task<List<RoleAccessManagerResponse>> GetAllRoleAccessAsync();
+        Task<List<RoleAccessManagerResponse>> GetRoleAccessOnRoleIdAsync(int roleId);
     }
 }
