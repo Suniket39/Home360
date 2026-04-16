@@ -23,8 +23,13 @@ namespace Home360.Infrastructure
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
             services.AddScoped<IScreenMasterRepository, ScreenMasterRepository>();
             services.AddScoped<IRoleAccessManagerRepository, RoleAccessManagerRepository>();
+
             services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+            services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
             services.AddScoped<IExpenseTransactionRepository, ExpenseTransactionRepository>();
+
+            services.AddScoped<IGroceryInventory, GroceryInventoryRepository>();
+            services.AddScoped<IGroceryItemRepository, GroceryItemRepository>();
             return services;
         }
     }

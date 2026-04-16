@@ -30,6 +30,11 @@ namespace Home360.Infrastructure.Persistence
 
         #endregion
 
+        #region Grocery Inventory Management
+        public virtual DbSet<GroceryItem> GroceryItems { get; set; }
+        public virtual DbSet<GroceryInventory> GroceryInventories { get; set; }
+        #endregion
+
         [System.Obsolete]
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +51,11 @@ namespace Home360.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new ExpenseCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ExpenseTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ExpenseTransactionConfiguration());
+            #endregion
+
+            #region Grocery Inventory Management
+            modelBuilder.ApplyConfiguration(new GroceryItemConfiguration());
+            modelBuilder.ApplyConfiguration(new GroceryInventoryConfiguration());
             #endregion
         }
 
