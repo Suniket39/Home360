@@ -9,5 +9,7 @@ namespace Home360.Application
         public DateTime AccessTokenExpirations { get; set; }
         public DateTime RefreshTokenExpiration { get; set; }
         public UserResponse User { get; set; } = new UserResponse();
+        public List<UserAccessDto> UserAccess { get; set; } = new();
+        public List<MenuAccessDto> MenuAccess { get; set; } = new();
     }
 }
