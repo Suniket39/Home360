@@ -40,21 +40,7 @@ namespace Home360.Application.Services
                 var refreshToken = _jwtService.GenerateRefreshToken();
 
                 //Call here UserScreenAccessMenu and send response
-                var roleAccess  = await _roleAccessManagerService.GetRoleAccessOnRoleIdAsync(userValid.RoleId);
-                var screenMaster = await _screenMasterService.GetAllScreensAsync();// add Cache
-                foreach (var access in roleAccess)
-                { 
-                    var screen = screenMaster.FirstOrDefault(s => s.ScreenId == access.ScreenId);
-                    if (screen != null)
-                    {
-                        var menuDto = new MenuAccessDto();
-                        menuDto.SceenId = screen.ScreenId;
-                        menuDto.ScreenCode = screen.ScreenCode;
-                        menuDto.MenuName = screen.MenuName;
-                        menuDto.MenuIcon = screen.MenuIcon;
-                        menuDto.RoutingUrl = screen.RoutingURL;
-                    }   
-                }
+                var userRoleMenuAccess = await GetUserRoleSpecificMenuAccess(userValid.RoleId);
                 //Add refreshToken
                 await _jwtService.SaveRefreshTokenAsync(refreshToken, userValid.UserId);
 
@@ -63,11 +49,13 @@ namespace Home360.Application.Services
                     AccessToken = accessToken,
                     RefreshToken = refreshToken,
                     AccessTokenExpirations = DateTime.UtcNow.AddMinutes(15), // Example expiration time
+                    UserAccess = userRoleMenuAccess.Item1,
+                    MenuAccess = userRoleMenuAccess.Item2,
                     User = new UserResponse
                     {
                         UserId = userValid.UserId,
                         Email = userValid.Email,
-                        Roles = userValid.Roles
+                        Roles = userValid.Roles,
                     }
                 };
             }
@@ -118,6 +106,46 @@ namespace Home360.Application.Services
 
             var isRemoved = await _jwtService.RevokeRefreshTokenAsync(refreshToken);
             return "Token revoked successfully.";
+        }
+
+        public async Task<(List<UserAccessDto>, List<MenuAccessDto>)> GetUserRoleSpecificMenuAccess(int roleId)
+        {
+            var roleAccess = await _roleAccessManagerService.GetRoleAccessOnRoleIdAsync(roleId);
+            var screenMaster = await _screenMasterService.GetAllScreensAsync();// add Cache
+
+            List<MenuAccessDto> menuAccessList = new List<MenuAccessDto>();
+            List<UserAccessDto> userAccessList = new List<UserAccessDto>();
+
+            foreach (var access in roleAccess)
+            {
+                var userAccessDto = new UserAccessDto();
+                userAccessDto.CanRead = access.CanRead;
+                userAccessDto.CanCreate = access.CanCreate;
+                userAccessDto.CanUpdate = access.CanUpdate;
+                userAccessDto.CanDeactivate = access.CanDeactivate;
+
+                var screen = screenMaster.FirstOrDefault(s => s.ScreenId == access.ScreenId);
+                if (screen != null)
+                {
+                    var menuDto = new MenuAccessDto();
+                    menuDto.SceenId = screen.ScreenId;
+                    menuDto.ScreenCode = screen.ScreenCode;
+                    menuDto.MenuName = screen.MenuName;
+                    menuDto.MenuIcon = screen.MenuIcon;
+                    menuDto.RoutingUrl = screen.RoutingURL;
+                    menuDto.CanRead = access.CanRead;
+                    menuDto.CanCreate = access.CanCreate;
+                    menuDto.CanUpdate = access.CanUpdate;
+                    menuDto.CanDeactivate = access.CanDeactivate;
+
+                    userAccessDto.ScreenCode = screen.ScreenCode;
+                    userAccessDto.RoutingUrl = screen.RoutingURL;
+
+                    menuAccessList.Add(menuDto);
+                }
+                userAccessList.Add(userAccessDto);
+            }
+            return (userAccessList, menuAccessList);
         }
     }
 }

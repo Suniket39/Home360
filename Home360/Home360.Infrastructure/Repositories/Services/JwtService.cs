@@ -1,5 +1,4 @@
 ﻿using Home360.Application;
-using Home360.Application.DTOs;
 using Home360.Application.Interfaces;
 using Home360.Domain.Entities;
 using Home360.Infrastructure.Persistence;
@@ -11,7 +10,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 
 namespace Home360.Infrastructure.Repositories
 {
@@ -179,58 +177,6 @@ namespace Home360.Infrastructure.Repositories
                 return true;
             }
             catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-
-
-        public async Task<(List<UserScreenAccessDto>, List<MenuAccessDto>)> GetUserRoleSpecificMenuAccess(int roleId)
-        {
-            try
-            {
-                List<UserScreenAccessDto> userAccessList = new List<UserScreenAccessDto>();
-                List<MenuAccessDto> menuDtoList = new List<MenuAccessDto>();
-                using HomeDbContext context = _homeContextFactory.CreateDbContext();
-                var roleAccess = await context.RoleAccessManager
-                                 .Where(x => x.RoleId == roleId)
-                                 .ToListAsync();
-                var screenMaster = await context.ScreenMaster.AsNoTracking().ToListAsync();
-
-                foreach (var access in roleAccess)
-                {
-                    var userAccessDto = new UserScreenAccessDto();
-                    if (access.CanCreate) userAccessDto.CanCreate = access.CanCreate;
-                    if (access.CanRead) userAccessDto.CanRead = access.CanRead;
-                    if (access.CanUpdate) userAccessDto.CanUpdate = access.CanUpdate;
-                    if (access.CanDeactivate) userAccessDto.CanDeactivate = access.CanDeactivate;
-
-                    var screen = screenMaster.FirstOrDefault(x => x.ScreenId == access.ScreenId);
-                    if (screen != null)
-                    {
-                        // Build user access string based on permissions (C, R, U, D)
-                        var menuDto = new MenuAccessDto();
-                        menuDto.SceenId = screen.ScreenId;
-                        menuDto.ScreenCode = screen.ScreenCode;
-                        menuDto.MenuName = screen.MenuName;
-                        menuDto.MenuIcon = screen.MenuIcon;
-                        menuDto.RoutingUrl = screen.RoutingURL;
-                        if (access.CanCreate) userAccessDto.CanCreate = access.CanCreate;
-                        if (access.CanRead) userAccessDto.CanRead = access.CanRead;
-                        if (access.CanUpdate) userAccessDto.CanUpdate = access.CanUpdate;
-                        if (access.CanDeactivate) userAccessDto.CanDeactivate = access.CanDeactivate;
-                        userAccessDto.ScreenCode = screen.ScreenCode;
-                        // Add to claims or user access list as needx`ed
-
-                        menuDtoList.Add(menuDto);
-                    }
-
-                    userAccessList.Add(userAccessDto);
-                }
-                return (userAccessList, menuDtoList);
-            }
-            catch (Exception)
             {
                 throw;
             }

@@ -1,6 +1,6 @@
 ﻿namespace Home360.Application.DTOs
 {
-    public class UserScreenAccessDto
+    public class UserAccessDto
     {
         public string ScreenCode { get; set; }
         public string RoutingUrl { get; set; }

@@ -32,7 +32,7 @@ namespace Home360.API.Core.Auth
                 return;
             }
 
-            var userAccess = (List<UserScreenAccessDto>)userAccessInfo;
+            var userAccess = (List<UserAccessDto>)userAccessInfo;
             if (userAccess == null)
             {
                 context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
@@ -51,7 +51,7 @@ namespace Home360.API.Core.Auth
             }
         }
 
-        private bool CheckAccess(UserScreenAccessDto dto, string access = null)
+        private bool CheckAccess(UserAccessDto dto, string access = null)
         {
             if (access == "C")
                 return dto.CanCreate;
