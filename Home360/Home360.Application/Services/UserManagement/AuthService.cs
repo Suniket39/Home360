@@ -82,7 +82,7 @@ namespace Home360.Application.Services
             var newRefreshToken = _jwtService.GenerateRefreshToken();
             // Save the new refresh token and invalidate the old one
             await _jwtService.SaveRefreshTokenAsync(newRefreshToken, user.UserId);
-            var isRemoved = await _jwtService.RevokeRefreshTokenAsync(refreshToken);
+            var isRemoved = await _jwtService.RevokeRefreshTokenAsync(oldToken.Token);
             return new AuthResponse
             {
                 AccessToken = newAccessToken,
