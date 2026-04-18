@@ -4,7 +4,7 @@
     {
         public int InventoryId { get; set; }
         public int ItemId { get; set; }
-        public int Quatity { get; set; }
+        public int Quantity { get; set; }
         public decimal Weight { get; set; }
         public string Status { get; set; }
         public string Remarks { get; set; }

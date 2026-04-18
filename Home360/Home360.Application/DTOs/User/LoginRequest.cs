@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Home360.Application
+namespace Home360.Application.DTOs
 {
     public class LoginRequest
     {

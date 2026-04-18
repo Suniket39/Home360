@@ -9,8 +9,8 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
         public void Configure(EntityTypeBuilder<GroceryInventory> builder)
         {
             builder.HasKey(x => x.InventoryId);
-            builder.Property(x => x.Quatity).IsRequired(false);
-            builder.Property(x => x.Weight).IsRequired(false);
+            builder.Property(x => x.Quantity).IsRequired();
+            builder.Property(x => x.Weight).IsRequired();
             builder.Property(x => x.Status).IsRequired().HasMaxLength(20);
             builder.Property(x => x.Remarks).IsRequired().HasMaxLength(255);
 

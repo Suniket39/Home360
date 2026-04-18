@@ -1,5 +1,4 @@
-﻿
-using Home360.Application.DTOs;
+﻿using Home360.Application.DTOs;
 
 namespace Home360.Application.Interfaces.Services
 {
