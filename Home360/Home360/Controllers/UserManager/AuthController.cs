@@ -1,5 +1,4 @@
-﻿using Home360.Application;
-using Home360.Application.DTOs;
+﻿using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

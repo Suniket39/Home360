@@ -1,4 +1,5 @@
 ﻿using Home360.Application;
+using Home360.Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -10,22 +11,24 @@ namespace Home360.API.Core.Middleware
     public class JwtHandlerMiddleware : IMiddleware
     {
         private readonly JwtSettings _jwtSettings;
+        private readonly IAuthService _authService; 
 
-        public JwtHandlerMiddleware(IOptions<JwtSettings> jwtSettings)
+        public JwtHandlerMiddleware(IOptions<JwtSettings> jwtSettings, IAuthService authService)
         {
             _jwtSettings = jwtSettings.Value;
+            _authService = authService;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate _next)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
-                AttachAccountToContext(context, token);
+                await AttachAccountToContext(context, token);
 
             await _next(context);
         }
 
-        private void  AttachAccountToContext(HttpContext context, string token)
+        private async Task  AttachAccountToContext(HttpContext context, string token)
         {
             try
             {
@@ -48,7 +51,9 @@ namespace Home360.API.Core.Middleware
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "nameid").Value);
                 var userName = jwtToken.Claims.First(x => x.Type == "unique_name").Value;
-                var userAccess = jwtToken.Claims.First(x => x.Type == "UserAccess").Value;
+                //var userAccess = jwtToken.Claims.First(x => x.Type == "UserAccess").Value;
+                var userRoleMenuAccess = await _authService.GetUserRoleSpecificMenuAccess(userId);
+                var userAccess = userRoleMenuAccess.Item1;
 
                 context.Session.SetInt32("UserId", userId);
                 context.Session.SetString("UserName", userName);
