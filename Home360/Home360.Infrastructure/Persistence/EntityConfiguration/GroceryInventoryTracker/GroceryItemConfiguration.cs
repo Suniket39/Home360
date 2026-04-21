@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Home360.Infrastructure.Persistence.EntityConfiguration
+namespace Home360.Infrastructure.Persistence.EntityConfiguration8
 {
     public class GroceryItemConfiguration : IEntityTypeConfiguration<GroceryItem>
     {
