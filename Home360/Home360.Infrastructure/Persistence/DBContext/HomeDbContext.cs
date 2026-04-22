@@ -1,5 +1,6 @@
 ﻿using Home360.Domain.Entities;
 using Home360.Infrastructure.Persistence.EntityConfiguration;
+using Home360.Infrastructure.Persistence.EntityConfiguration8;
 using Home360.Infrastructure.Persistence.Helper;
 using Microsoft.EntityFrameworkCore;
 

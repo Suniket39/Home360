@@ -9,5 +9,6 @@
         public string Status { get; set; }
 
         public virtual ICollection<GroceryInventory> GroceryInventories { get; set; }
+        public virtual ICollection<MonthlyCart> MonthlyCart { get; set; }
     }
 }
