@@ -30,6 +30,7 @@ namespace Home360.Infrastructure
 
             services.AddScoped<IGroceryInventory, GroceryInventoryRepository>();
             services.AddScoped<IGroceryItemRepository, GroceryItemRepository>();
+            services.AddScoped<IMonthlyCartRepository, MonthlyCartRepository>();
             return services;
         }
     }

@@ -21,6 +21,7 @@ namespace Home360.Application
 
             services.AddScoped<IGroceryItemService, GroceryItemService>();
             services.AddScoped<IGroceryInventoryService, GroceryInventoryService>();
+            services.AddScoped<IMonthlyCartService, MonthlyCartService>();
             return services;
         }
     }
