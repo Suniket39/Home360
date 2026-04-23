@@ -34,6 +34,7 @@ namespace Home360.Infrastructure.Persistence
         #region Grocery Inventory Management
         public virtual DbSet<GroceryItem> GroceryItems { get; set; }
         public virtual DbSet<GroceryInventory> GroceryInventories { get; set; }
+        public virtual DbSet<MonthlyCart> MonthlyCarts { get; set; }
         #endregion
 
         [System.Obsolete]
@@ -57,6 +58,7 @@ namespace Home360.Infrastructure.Persistence
             #region Grocery Inventory Management
             modelBuilder.ApplyConfiguration(new GroceryItemConfiguration());
             modelBuilder.ApplyConfiguration(new GroceryInventoryConfiguration());
+            modelBuilder.ApplyConfiguration(new MonthlyCartConfiguration());
             #endregion
         }
 
