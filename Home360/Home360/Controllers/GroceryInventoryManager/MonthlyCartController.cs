@@ -27,7 +27,7 @@ namespace Home360.API.Controllers.GroceryInventoryManager
         }
 
         [HttpPut]
-        [Route("addCart")]
+        [Route("updateCart")]
         public async Task<IActionResult> UpdateMonthlyCartAsync(MonthlyCartRequest request)
         {
             if (!ModelState.IsValid)
