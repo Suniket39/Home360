@@ -30,6 +30,17 @@ namespace Home360.Application.Services
             return categoryAdded ? "Product Added Successfully" : "Product failed to add!";
         }
 
+        public async Task<string> UpdateMonthlyCartAsync(MonthlyCartRequest cartRequest)
+        {
+            var cartExists = await _monthlyCartRepository.GetMonthlyCartByIdAsync(cartRequest.CartId);
+            if (cartExists == null) return "Cart does not exists!";
+
+            var cart = _mapper.Map<MonthlyCart>(cartRequest);
+
+            bool categoryAdded = await _monthlyCartRepository.RegisterMonthlyCartAsync(cart);
+            return categoryAdded ? "Product Added Successfully" : "Product failed to add!";
+        }
+
         public async Task<List<MonthlyCartResponse>> GetAllMonthlyCartAsync()
         {
             // Add Pagination if Data Grows
