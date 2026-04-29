@@ -29,10 +29,31 @@ namespace Home360.Infrastructure.Repositories
             }
         }
 
+        public async Task<bool> UpdateMonthlyCartAsync(MonthlyCart cart)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+                context.MonthlyCarts.Update(cart);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<List<MonthlyCart>> GetAllMonthlyCartAsync()
         {
             using HomeDbContext context = _homeContextFactory.CreateDbContext();
             return await context.MonthlyCarts.ToListAsync();
+        }
+
+        public async Task<MonthlyCart> GetMonthlyCartByIdAsync(int id)
+        {
+            using HomeDbContext context = _homeContextFactory.CreateDbContext();
+            return await context.MonthlyCarts.FirstOrDefaultAsync(x => x.CartId == id);
         }
     }
 }
