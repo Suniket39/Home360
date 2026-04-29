@@ -28,10 +28,31 @@ namespace Home360.Infrastructure.Repositories
             }
         }
 
+        public async Task<bool> UpdateInventoryAsync(GroceryInventory inventory)
+        {
+            try
+            {
+                using HomeDbContext context = _homeContextFactory.CreateDbContext();
+                context.GroceryInventories.Update(inventory);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<List<GroceryInventory>> GetAllInventoriesAsync()
         {
             using HomeDbContext context = _homeContextFactory.CreateDbContext();
             return await context.GroceryInventories.ToListAsync();
+        }
+
+        public async Task<GroceryInventory?> GetInventoryOnIdAsync(int inventoryId)
+        {
+            using HomeDbContext context = _homeContextFactory.CreateDbContext();
+            return await context.GroceryInventories.FirstOrDefaultAsync(x => x.InventoryId == inventoryId);
         }
     }
 }

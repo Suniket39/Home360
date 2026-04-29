@@ -5,6 +5,8 @@ namespace Home360.Application.Interfaces.Repositories
     public interface IGroceryInventory
     {
         Task<bool> RegisterInventoryAsync(GroceryInventory inventory);
+        Task<bool> UpdateInventoryAsync(GroceryInventory inventory);
         Task<List<GroceryInventory>> GetAllInventoriesAsync();
+        Task<GroceryInventory?> GetInventoryOnIdAsync(int inventoryId);
     }
 }
