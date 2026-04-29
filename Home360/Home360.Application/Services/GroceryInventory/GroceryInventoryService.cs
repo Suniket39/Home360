@@ -26,8 +26,23 @@ namespace Home360.Application.Services
 
             var inventory = _mapper.Map<GroceryInventory>(inventoryRequest);
 
-            bool categoryAdded = await _inventoryRepository.RegisterInventoryAsync(inventory);
-            return categoryAdded ? "Inventory Added Successfully" : "Inventory failed to add!";
+            bool added = await _inventoryRepository.RegisterInventoryAsync(inventory);
+            return added ? "Inventory Added Successfully" : "Inventory failed to add!";
+        }
+
+        public async Task<string> UpdateInventoryAsync(GroceryInventoryRequest inventoryRequest)
+        {
+            var inventoryExists = await _inventoryRepository.GetInventoryOnIdAsync(inventoryRequest.InventoryId);
+            if (inventoryExists == null) return "Inventory does not exists!";
+
+            inventoryExists.ItemId = inventoryRequest.ItemId;
+            inventoryExists.Amount = inventoryRequest.Amount;
+            inventoryExists.Status = inventoryRequest.Status;
+            if(!string.IsNullOrEmpty(inventoryRequest.Remarks))
+                inventoryExists.Remarks = inventoryRequest.Remarks;
+
+            bool updated = await _inventoryRepository.UpdateInventoryAsync(inventoryExists);
+            return updated ? "Inventory Updated Successfully" : "Inventory failed to Update!";
         }
 
         public async Task<List<GroceryInventoryResponse>> GetAllInventoriesAsync()

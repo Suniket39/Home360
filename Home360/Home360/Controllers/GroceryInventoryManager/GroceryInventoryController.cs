@@ -26,6 +26,19 @@ namespace Home360.API.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [Route("updateInventory")]
+        public async Task<IActionResult> UpdateInventoryAsync(GroceryInventoryRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not a valid Model");
+            }
+
+            string result = await _groceryInventoryService.UpdateInventoryAsync(request);
+            return Ok(result);
+        }
+
         [HttpGet]
         [Route("getAllInventories")]
         public async Task<List<GroceryInventoryResponse>> GetAllCategoriesAsync()
