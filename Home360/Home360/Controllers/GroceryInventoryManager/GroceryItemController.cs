@@ -1,5 +1,6 @@
 ﻿using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
+using Home360.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Home360.API.Controllers
@@ -24,6 +25,16 @@ namespace Home360.API.Controllers
 
             string result = await _groceryItemService.RegisterItemAsync(request);
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("updateInventory")]
+        public async Task<IActionResult> UpdateInventoryAsync(GroceryItemRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid Model");
+
+            return Ok(await _groceryItemService.UpdateGroceryItemAsync(request));
         }
 
         [HttpGet]

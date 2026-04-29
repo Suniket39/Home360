@@ -30,6 +30,21 @@ namespace Home360.Application.Services
             return itemAdded ? "Item Added Successfully" : "Item failed to add!";
         }
 
+        public async Task<string> UpdateGroceryItemAsync(GroceryItemRequest itemRequest)
+        {
+            var itemExists = await _itemRepository.GetItemOnIdAsync(itemRequest.ItemId);
+            if (itemExists == null) return "Item does not exists!";
+
+            itemExists.ItemName = itemRequest.ItemName;
+            itemExists.ItemUnit = itemRequest.ItemUnit;
+            itemExists.Status = itemRequest.Status;
+            if (!string.IsNullOrEmpty(itemRequest.ItemDescription))
+                itemExists.ItemDescription = itemRequest.ItemDescription;
+
+            bool updated = await _itemRepository.UpdateGroceryItemAsync(itemExists);
+            return updated ? "Item Updated Successfully" : "Item failed to Update!";
+        }
+
         public async Task<List<GroceryItemResponse>> GetAllItemsAsync()
         {
             // Add Pagination if Data Grows

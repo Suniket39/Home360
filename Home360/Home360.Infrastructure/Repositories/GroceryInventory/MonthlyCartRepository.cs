@@ -50,7 +50,7 @@ namespace Home360.Infrastructure.Repositories
             return await context.MonthlyCarts.ToListAsync();
         }
 
-        public async Task<MonthlyCart> GetMonthlyCartByIdAsync(int id)
+        public async Task<MonthlyCart?> GetMonthlyCartByIdAsync(int id)
         {
             using HomeDbContext context = _homeContextFactory.CreateDbContext();
             return await context.MonthlyCarts.FirstOrDefaultAsync(x => x.CartId == id);
