@@ -26,9 +26,19 @@ namespace Home360.API.Controllers
                 return BadRequest("Not a valid Model");
             }
 
-            // TODO common method for adding common entity model data
             string result = await _expenseCategoryService.RegisterCategoryAsync(category);
             return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("updateCategory")]
+        public async Task<IActionResult> UpdateMonthlyCartAsync(ExpenseCategoryRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not a valid Model");
+            }
+            return Ok(await _expenseCategoryService.UpdateCategoryAsync(request));
         }
 
         [HttpGet]
