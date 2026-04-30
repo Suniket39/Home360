@@ -19,16 +19,25 @@ namespace Home360.API.Controllers
 
         [HttpPost]
         [Route("registerType")]
-        public async Task<IActionResult> RegisterCategoryAsync(ExpenseTypeRequest type)
+        public async Task<IActionResult> RegisterCategoryTypeAsync(ExpenseTypeRequest type)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Not a valid Model");
             }
-
-            // TODO common method for adding common entity model data
             string result = await _typeService.RegisterTypesAsync(type);
             return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("updateType")]
+        public async Task<IActionResult> UpdateCategoryTypeAsync(ExpenseTypeRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not a valid Model");
+            }
+            return Ok(await _typeService.UpdateTypeAsync(request));
         }
 
         [HttpGet]
