@@ -19,7 +19,8 @@ namespace Home360.Application.Services
 
         public async Task<string> RegisterCategoryAsync(ExpenseCategoryRequest categoryRequest)
         {
-            var (nameExists, codeExists) = await _categoryRepository.CheckDuplicateCategoryNameOrCode(categoryRequest.CategoryName, categoryRequest.CategoryCode);
+            var (nameExists, codeExists) = await _categoryRepository.CheckDuplicateCategoryNameOrCode(
+                categoryRequest.CategoryName, categoryRequest.CategoryCode, 0);
             if (nameExists && codeExists) return "Catgory Name & Code already exists!";
             if (nameExists) return "Category Name already exists!";
             if (codeExists) return "Category Code already exists!";
@@ -28,6 +29,27 @@ namespace Home360.Application.Services
 
             bool categoryAdded = await _categoryRepository.RegisterCategoryAsync(category);
             return categoryAdded ? "Category Added Successfully" : "Category failed to add!";
+        }
+
+        public async Task<string> UpdateCategoryAsync(ExpenseCategoryRequest categoryRequest)
+        {
+            var categoryExists = await _categoryRepository.GetCategoryOnIdAsync(categoryRequest.CategoryId);
+            if (categoryExists == null) return "Category does not exists!";
+
+            var (nameExists, codeExists) = await _categoryRepository.CheckDuplicateCategoryNameOrCode(
+                categoryRequest.CategoryName, categoryRequest.CategoryCode, categoryExists.CategoryId);
+            if (nameExists && codeExists) return "Catgory Name & Code already exists!";
+            if (nameExists) return "Category Name already exists!";
+            if (codeExists) return "Category Code already exists!";
+
+            categoryExists.CategoryName = categoryRequest.CategoryName;
+            categoryExists.CategoryCode = categoryRequest.CategoryCode;
+            categoryExists.CategoryDescription = categoryRequest.CategoryDescription;
+            categoryExists.ParentCategoryId = categoryRequest.ParentCategoryId;
+            categoryExists.ParentCategoryCode = categoryRequest.ParentCategoryCode;
+
+            bool updated = await _categoryRepository.UpdateCategoryAsync(categoryExists);
+            return updated ? "Category Updated Successfully" : "Category failed to Update!";
         }
 
         public async Task<List<ExpenseCategoryResponse>> GetAllCategoriesAsync()
