@@ -1,9 +1,13 @@
-﻿using Home360.Application.DTOs;
+﻿using Home360.API.Core.Auth;
+using Home360.Application.DTOs;
 using Home360.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Home360.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class GroceryInventoryController : ControllerBase
     {
         private readonly IGroceryInventoryService _groceryInventoryService;
@@ -26,7 +30,7 @@ namespace Home360.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("updateInventory")]
         public async Task<IActionResult> UpdateInventoryAsync(GroceryInventoryRequest request)
         {

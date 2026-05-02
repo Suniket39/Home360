@@ -19,15 +19,27 @@ namespace Home360.API.Controllers
 
         [HttpPost]
         [Route("addExpense")]
-        public async Task<IActionResult> RegisterCategoryAsync(ExpenseTransactionRequest tranRequest)
+        public async Task<IActionResult> RegisterTransactionAsync(ExpenseTransactionRequest tranRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Not a valid Model");
             }
 
-            // TODO common method for adding common entity model data
             string result = await _expenseTransactionService.RegisterTransactionAsync(tranRequest);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("updateExpense")]
+        public async Task<IActionResult> UpateTransactionAsync(ExpenseTransactionRequest tranRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not a valid Model");
+            }
+
+            string result = await _expenseTransactionService.UpdateTransactionAsync(tranRequest);
             return Ok(result);
         }
 
