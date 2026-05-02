@@ -5,6 +5,7 @@ namespace Home360.Application.Interfaces
     public interface IExpenseTransactionService
     {
         Task<string> RegisterTransactionAsync(ExpenseTransactionRequest category);
+        Task<string> UpdateTransactionAsync(ExpenseTransactionRequest tranRequest);
         Task<List<ExpenseTransactionResponse>> GetAllTransactionsAsync();
     }
 }
