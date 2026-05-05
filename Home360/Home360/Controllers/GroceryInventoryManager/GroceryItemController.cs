@@ -31,7 +31,7 @@ namespace Home360.API.Controllers
         }
 
         [HttpPut]
-        [Route("updateInventory")]
+        [Route("updateItem")]
         public async Task<IActionResult> UpdateInventoryAsync(GroceryItemRequest request)
         {
             if (!ModelState.IsValid)

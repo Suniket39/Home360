@@ -26,7 +26,6 @@ namespace Home360.API.Controllers
                 return BadRequest("Not a valid Model");
             }
 
-            // TODO common method for adding common entity model data
             string result = await _roleMasterService.RegisterRoleAsync(roleRequest);
             return Ok(result);
         }
