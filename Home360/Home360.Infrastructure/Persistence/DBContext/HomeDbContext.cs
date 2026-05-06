@@ -37,6 +37,10 @@ namespace Home360.Infrastructure.Persistence
         public virtual DbSet<MonthlyCart> MonthlyCarts { get; set; }
         #endregion
 
+        #region Bill Tracker
+        public virtual DbSet<Bills> Bills { get; set; }
+        #endregion
+
         [System.Obsolete]
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,6 +63,10 @@ namespace Home360.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new GroceryItemConfiguration());
             modelBuilder.ApplyConfiguration(new GroceryInventoryConfiguration());
             modelBuilder.ApplyConfiguration(new MonthlyCartConfiguration());
+            #endregion
+
+            #region Bill Tracker
+            modelBuilder.ApplyConfiguration(new BillsConfiguration());
             #endregion
         }
 
