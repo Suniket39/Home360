@@ -44,6 +44,11 @@ namespace Home360.Application
             CreateMap<GroceryItemRequest, GroceryItem>();
             CreateMap<GroceryItem, GroceryItemResponse>();
             #endregion
+
+            #region Expense Tracker
+            CreateMap<BillRequest, Bills>();
+            CreateMap<Bills, BillResponse>();
+            #endregion
         }
     }
 }

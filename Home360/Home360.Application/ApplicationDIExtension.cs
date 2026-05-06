@@ -1,6 +1,8 @@
 ﻿using Home360.Application.Interfaces;
 using Home360.Application.Interfaces.Services;
+using Home360.Application.Interfaces.Services.BillTracker;
 using Home360.Application.Services;
+using Home360.Application.Services.BillTracker;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Home360.Application
@@ -22,6 +24,8 @@ namespace Home360.Application
             services.AddScoped<IGroceryItemService, GroceryItemService>();
             services.AddScoped<IGroceryInventoryService, GroceryInventoryService>();
             services.AddScoped<IMonthlyCartService, MonthlyCartService>();
+
+            services.AddScoped<IBillsService, BillService>();
             return services;
         }
     }
