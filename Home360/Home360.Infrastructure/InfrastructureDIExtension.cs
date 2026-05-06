@@ -1,7 +1,9 @@
 ﻿using Home360.Application.Interfaces;
 using Home360.Application.Interfaces.Repositories;
+using Home360.Application.Interfaces.Repositories.BlillTracker;
 using Home360.Infrastructure.Persistence;
 using Home360.Infrastructure.Repositories;
+using Home360.Infrastructure.Repositories.BillTracker;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +33,8 @@ namespace Home360.Infrastructure
             services.AddScoped<IGroceryInventory, GroceryInventoryRepository>();
             services.AddScoped<IGroceryItemRepository, GroceryItemRepository>();
             services.AddScoped<IMonthlyCartRepository, MonthlyCartRepository>();
+
+            services.AddScoped<IBillRepository, BillRepository>();
             return services;
         }
     }
