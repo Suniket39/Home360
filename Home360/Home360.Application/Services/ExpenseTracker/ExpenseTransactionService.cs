@@ -20,8 +20,8 @@ namespace Home360.Application.Services
         {
             var transaction = _mapper.Map<ExpenseTransaction>(tranRequest);
 
-            bool categoryAdded = await _transactionRepository.RegisterTransactionAsync(transaction);
-            return categoryAdded ? "Transaction Added Successfully" : "Transaction failed to add!";
+            bool isAdded = await _transactionRepository.RegisterTransactionAsync(transaction);
+            return isAdded ? "Transaction Added Successfully" : "Transaction failed to add!";
         }
 
         public async Task<string> UpdateTransactionAsync(ExpenseTransactionRequest tranRequest)

@@ -11,6 +11,7 @@
         public string BillingCycle { get; set; } //( Monthly/ Quarterly / yearly )
         public bool IsRecurring { get; set; }
         public int ReminderDaysBefore { get; set; }
+        public string Status { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
     }
