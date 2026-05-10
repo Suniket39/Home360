@@ -24,10 +24,35 @@ namespace Home360.Application.Services.BillTracker
 
         public async Task<string> RegisterBillAsync(BillRequest request)
         {
-            var bill = _mapper.Map<Bills>(request);
+            try
+            {
+                var bill = _mapper.Map<Bills>(request);
 
-            bool categoryAdded = await _billRepository.RegisterBillAsync(bill);
-            return categoryAdded ? "Bill Added Successfully" : "Bill failed to add!";
+                bool added = await _billRepository.RegisterBillAsync(bill);
+
+                if (!added) return "Bill failed to add!";
+
+                if (added && request.Status != "Paid")
+                    return "Bills Added Successfully";
+
+                ExpenseTransactionRequest expenseTranReq = new()
+                {
+                    Amount = request.Amount,
+                    ExpenseName = request.Category,
+                    TransactionDate = DateTime.Now,
+                    TransactionType = "Debit",
+                    TransactionMode = "UPI", // ToDo get from BillRquest
+                    ExpenseCategoryId = 1, // ToDo Get from request or From Db
+                    ExpenseCategoryTypeId = 1, // ToDo Get from request or From Db
+                };
+                await _expenseTransactionService.RegisterTransactionAsync(expenseTranReq);
+                return "Bill Added Successfully";
+            }
+            catch (Exception ex)
+            {
+                //Add logger here
+                return "Bill failed to add!";
+            }
         }
 
         public async Task<string> UpdateBillAsync(BillRequest request)
