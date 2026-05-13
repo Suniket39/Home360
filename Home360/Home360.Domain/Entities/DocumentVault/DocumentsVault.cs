@@ -1,4 +1,4 @@
-﻿namespace Home360.Domain.Entities
+﻿namespace Home360.Domain.Entities.DocumentVault
 {
     public class DocumentsVault : CommonEntity
     {
