@@ -1,4 +1,5 @@
 ﻿using Home360.Domain.Entities;
+using Home360.Domain.Entities.DocumentVault;
 using Home360.Infrastructure.Persistence.EntityConfiguration;
 using Home360.Infrastructure.Persistence.EntityConfiguration8;
 using Home360.Infrastructure.Persistence.Helper;
@@ -41,6 +42,10 @@ namespace Home360.Infrastructure.Persistence
         public virtual DbSet<Bills> Bills { get; set; }
         #endregion
 
+        #region Document Vault Tracker
+        public virtual DbSet<DocumentsVault> DocumentVault { get; set; }
+        #endregion
+
         [System.Obsolete]
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,6 +72,10 @@ namespace Home360.Infrastructure.Persistence
 
             #region Bill Tracker
             modelBuilder.ApplyConfiguration(new BillsConfiguration());
+            #endregion
+
+            #region Document Vault Tracker
+            modelBuilder.ApplyConfiguration(new DocumentVaultConfiguration());
             #endregion
         }
 

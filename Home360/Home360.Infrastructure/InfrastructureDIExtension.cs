@@ -1,9 +1,11 @@
 ﻿using Home360.Application.Interfaces;
 using Home360.Application.Interfaces.Repositories;
 using Home360.Application.Interfaces.Repositories.BlillTracker;
+using Home360.Application.Interfaces.Repositories.DocumentsVaultTracker;
 using Home360.Infrastructure.Persistence;
 using Home360.Infrastructure.Repositories;
 using Home360.Infrastructure.Repositories.BillTracker;
+using Home360.Infrastructure.Repositories.DocumentsVaultTracker;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,7 @@ namespace Home360.Infrastructure
             services.AddScoped<IMonthlyCartRepository, MonthlyCartRepository>();
 
             services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IDocumentVaultRepository, DocumentVaultRepository>();
             return services;
         }
     }
