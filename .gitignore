@@ -250,3 +250,16 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# UI Region
+
+# Dependencies
+node_modules/
+
+# Angular build output
+dist/
+.angular/
+
+# IDE
+.vscode/
+.idea/
