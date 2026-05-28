@@ -1,4 +1,4 @@
-﻿using Home360.Domain.Entities;
+﻿using Home360.Domain.Entities.DocumentVault;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
