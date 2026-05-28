@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.card{
+    display: flex;
+}
+
+.example-card{
+    width: 25vw;
+    // height: auto;
+}
+
+mat-card-header{
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+}
+
+mat-card-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+mat-form-field {
+    width: 100%;
+    min-width: 300px;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.loginBtn{
+    width: 100%;
+}
