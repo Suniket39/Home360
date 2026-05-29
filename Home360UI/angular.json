@@ -30,7 +30,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@andreasnicolaou/toastify/dist/styles.css"
             ]
           },
           "configurations": {
