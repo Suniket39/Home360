@@ -11,7 +11,7 @@ import { QueryParamsHandling } from '@angular/router';
 export class ApiService {
 
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:5000/api';
+  private readonly apiUrl = 'http://localhost:5260/api';
     // private readonly baseUrl = environment.apiUrl; // Add in env
 
     
@@ -27,6 +27,22 @@ export class ApiService {
     method: 'get' | 'delete' = 'get'
   ) : Observable<T>{
     return this.http.get<T>(`${this.apiUrl}/${route}${id ? '/' + id: ''}`);
+  }
+
+  post<T>(
+    route: string,
+    data: T,
+    params: QueryParams = {},
+  ) : Observable<T>{
+    return this.http.post(`${this.apiUrl}/${route}`, data) as Observable<T>;
+  }
+
+  patch<T>(
+    route: string,
+    data: T,
+    params: QueryParams = {},
+  ) : Observable<T>{
+    return this.http.patch(`${this.apiUrl}/${route}`, data) as Observable<T>;
   }
 }
 
