@@ -3,20 +3,20 @@
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="login-form" (ngSubmit)="submit()">
+    <form class="login-form"  (submit)="$event.preventDefault(); onLogin()">
       <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
-        <!-- <input type="text" matInput placeholder="Ex. John" [formField]="loginForm.username" /> -->
+        <input type="text" matInput placeholder="Ex. John" [formField]="loginForm.username" />
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="........" autocomplete="off"/>
+        <input type="password" matInput placeholder="........" autocomplete="off" [formField]="loginForm.password"/>
       </mat-form-field>
-      <button matButton class="forgotPassword">Forgot Password?</button>
+      <button type="button" matButton class="forgotPassword">Forgot Password?</button>
       <section>
         <div class="button">
-          <button matButton="filled" class="loginBtn">Login</button>
+          <button type="submit" matButton="filled" class="loginBtn">Login</button>
           <!-- <button matButton="filled">Clear</button> -->
         </div>
       </section>

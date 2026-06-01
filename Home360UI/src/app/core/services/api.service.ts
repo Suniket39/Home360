@@ -1,7 +1,7 @@
 import { inject, Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Login } from '../../shared/components/models/login';
+import { LoginRequest } from '../../shared/components/models/loginRequest';
 import { QueryParamsHandling } from '@angular/router';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class ApiService {
     // private readonly baseUrl = environment.apiUrl; // Add in env
 
     
-  getLogin(): Observable<Login[]>{
-    return this.http.get<Login[]>(this.apiUrl);
+  getLogin(): Observable<LoginRequest[]>{
+    return this.http.get<LoginRequest[]>(this.apiUrl);
   }
 
   get<T>(

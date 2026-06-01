@@ -15,6 +15,18 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApi();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddDataProtection();
@@ -31,7 +43,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseCors("AllowAngular");
 app.UseSession();
 
 app.UseAuthentication();
