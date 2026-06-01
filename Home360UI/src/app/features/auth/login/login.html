@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="login">
+  <mat-card class="backgroundSection" appearance="outlined"> </mat-card>
+  <mat-card class="formSection" appearance="outlined">
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="login-form" (submit)="$event.preventDefault(); onLogin()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput placeholder="Ex. John" [formField]="loginForm.username" />
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="........"
+              autocomplete="off"
+              [formField]="loginForm.password"
+            />
+          </mat-form-field>
+          <button type="button" matButton class="forgotPassword">Forgot Password?</button>
+          <section>
+            <div class="button">
+              <button type="submit" matButton="filled" class="loginBtn">Login</button>
+              <!-- <button matButton="filled">Clear</button> -->
+            </div>
+          </section>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <p>Don't have an account? <button matButton>Register</button></p>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card>
+</div>
