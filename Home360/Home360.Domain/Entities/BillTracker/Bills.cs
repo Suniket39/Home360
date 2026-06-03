@@ -7,7 +7,7 @@
         public string Category { get; set; }
         public decimal Amount { get; set; }
         public DateTime BillDate { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
         public string BillingCycle { get; set; } //( Monthly/ Quarterly / yearly )
         public bool IsRecurring { get; set; }
         public int ReminderDaysBefore { get; set; }
