@@ -11,7 +11,7 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
             builder.HasKey(x => x.CartId);
             builder.Property(x => x.CartId).ValueGeneratedOnAdd();
             builder.Property(x => x.RequiredQty).IsRequired().HasPrecision(10, 4);
-            builder.Property(x => x.IsPurchased).IsRequired(false).HasMaxLength(30);
+            builder.Property(x => x.IsPurchased);
             builder.Property(x => x.Price).IsRequired().HasPrecision(10, 4);
             builder.HasOne(x => x.GroceryItem)
                 .WithMany(i => i.MonthlyCart)

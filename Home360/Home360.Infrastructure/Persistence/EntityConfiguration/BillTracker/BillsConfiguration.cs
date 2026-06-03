@@ -17,7 +17,7 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
             builder.Property(e => e.DueDate).IsRequired(false).HasColumnType("date");
             builder.Property(x => x.BillingCycle).IsRequired(false).HasMaxLength(30);
             builder.Property(x => x.IsRecurring);
-            builder.Property(x => x.ReminderDaysBefore).IsRequired(false);
+            builder.Property(x => x.ReminderDaysBefore);
             builder.Property(x => x.Status).IsRequired().HasMaxLength(30);
 
             builder.HasOne(x => x.User)

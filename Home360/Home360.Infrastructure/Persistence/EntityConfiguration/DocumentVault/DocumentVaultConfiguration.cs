@@ -20,9 +20,9 @@ namespace Home360.Infrastructure.Persistence.EntityConfiguration
             builder.Property(x => x.DocumentVersion).IsRequired(false).HasMaxLength(50);
             builder.Property(x => x.FileSize).IsRequired();
             builder.Property(x => x.LastAccessedDate).IsRequired(false);
-            builder.Property(x => x.IsArchived).IsRequired(false);
+            builder.Property(x => x.IsArchived);
             builder.Property(x => x.Checksum).IsRequired(false).HasMaxLength(64);
-            builder.Property(x => x.IsPublic).IsRequired(false);
+            builder.Property(x => x.IsPublic);
 
             builder.HasOne(x => x.User)
                    .WithMany()
