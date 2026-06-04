@@ -1,0 +1,33 @@
+<nav class="sidebar" [class.collapsed]="sidebar.collapsed()">
+  <div class="nav-body">
+    @for (section of sidebar.navSections; track section.title) {
+      <span class="section-label">{{ section.title }}</span>
+      @for (item of section.items; track item.route) {
+        <a
+          class="nav-item"
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [title]="sidebar.collapsed() ? item.label : ''"
+        >
+          <i class="ti ti-{{ item.icon }}" aria-hidden="true"></i>
+          <span class="nav-label">{{ item.label }}</span>
+          @if (item.badge) {
+            <span class="nav-badge">{{ item.badge }}</span>
+          }
+        </a>
+      }
+      <div class="nav-divider"></div>
+    }
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="user-row">
+      <div class="user-avatar">RD</div>
+      <div class="user-info">
+        <div class="user-name">Suniket P</div>
+        <div class="user-role">Administrator</div>
+      </div>
+      <i class="ti ti-dots user-more" aria-hidden="true"></i>
+    </div>
+  </div>
+</nav>
