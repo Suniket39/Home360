@@ -1,0 +1,40 @@
+<header class="header">
+  <button
+    class="hamburger"
+    [class.open]="sidebar.collapsed()"
+    (click)="sidebar.toggle()"
+    aria-label="Toggle sidebar"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="logo">
+    <div class="logo-mark">
+      
+    </div>
+    <span class="logo-text">Home 360</span>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="search-bar">
+    <i class="ti ti-search"></i>
+    <span>Search anything…</span>
+  </div>
+
+  <div class="header-actions">
+    <button class="icon-btn" aria-label="Notifications">
+      <i class="ti ti-bell"></i>
+      <span class="notif-dot"></span>
+    </button>
+    <button class="icon-btn" aria-label="Help">
+      <i class="ti ti-help-circle"></i>
+    </button>
+    <button class="icon-btn" aria-label="Settings">
+      <i class="ti ti-settings"></i>
+    </button>
+    <div class="user-avatar" title="Rohan Desai">RD</div>
+  </div>
+</header>

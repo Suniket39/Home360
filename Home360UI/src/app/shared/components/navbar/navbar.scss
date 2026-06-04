@@ -1,0 +1,140 @@
+.header {
+  height: 58px;
+  background: #ffffff;
+  border-bottom: 1px solid #edeef2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+  flex-shrink: 0;
+  z-index: 100;
+  position: relative;
+}
+
+.hamburger {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4.5px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+
+  span {
+    display: block;
+    width: 17px;
+    height: 1.5px;
+    background: #3d3f50;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+
+  &:hover { background: #f0f1f5; }
+
+  &.open {
+    span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+}
+
+.logo {
+    // background-image: url('../../../../assets/images/Home360.png');
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #1a1c27;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.logo-mark {
+    background: url('../../../../assets/icons/Home360.ico');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i { font-size: 15px; color: #fff; }
+}
+
+.spacer { flex: 1; }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f6fa;
+  border: 1px solid #edeef2;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  color: #9295a8;
+  cursor: text;
+  height: 32px;
+
+  i { font-size: 15px; }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b6e82;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+
+  i { font-size: 18px; }
+  &:hover { background: #f0f1f5; color: #1a1c27; }
+}
+
+.notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid #fff;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #eef0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4f46e5;
+  cursor: pointer;
+  margin-left: 6px;
+  border: 1.5px solid #e0e1f8;
+}
