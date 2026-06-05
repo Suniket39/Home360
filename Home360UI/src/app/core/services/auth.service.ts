@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { LoginRequest } from '../../shared/components/models/loginRequest';
+import { LoginRequest, User } from '../../shared/components/models/loginRequest';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
+
+  private userSubject = new BehaviorSubject<User | null>(null);
+
+  user$ : Observable<User | null> = this.userSubject.asObservable();
+
+  private readonly API_URL = '/authenticate'
 
   constructor(private apiService : ApiService) {
     
