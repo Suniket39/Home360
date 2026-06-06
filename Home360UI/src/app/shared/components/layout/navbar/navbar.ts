@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarService } from '../sidebar/sidebar.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 
 @Component({
@@ -23,4 +24,13 @@ import { SidebarService } from '../sidebar/sidebar.service';
 })
 export class Navbar {
    sidebar = inject(SidebarService);
+
+   constructor(private authService: AuthService) {
+    
+   }
+
+   onLogout(){
+    debugger
+    this.authService.logout();
+   }
 }
