@@ -36,10 +36,11 @@ namespace Home360.API.Controllers.UserManager
         [Route("refresh-token")]
         public async Task<IActionResult> RefreshTokenAsyn([FromBody] RevokeTokenRequest request)
         {
-            if (string.IsNullOrEmpty(Request.Cookies["refreshToken"]))
+            var refreshToken = Request.Cookies["refreshToken"];
+            if (string.IsNullOrEmpty(refreshToken))
                 return BadRequest("Refresh token is missing.");
 
-            var response = await _authService.RefreshTokenAsync(request.Token);
+            var response = await _authService.RefreshTokenAsync(refreshToken);
             if (response == null) return Unauthorized("Invalid refresh token.");
             SetTokenCookie(response.RefreshToken);
             return Ok(response);
@@ -49,7 +50,7 @@ namespace Home360.API.Controllers.UserManager
         [Route("revoke-token")]
         public async Task<IActionResult> RevokeTokenAsync([FromBody] RevokeTokenRequest request)
         {
-            if (string.IsNullOrEmpty(Request.Cookies["refreshToken"]))
+            if (string.IsNullOrEmpty(request.Token))
                 return BadRequest("Refresh token is missing.");
             var result = await _authService.RevokeTokenAsync(request.Token);
             if (result == null) return NotFound("Token not found.");
