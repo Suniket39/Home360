@@ -31,9 +31,15 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    debugger
     this.isAuthenticated.set(false);
-    this.router.navigate(['/login']);
+    var body ={
+      Token : localStorage.getItem(this.TOKEN_KEY)
+    }
+    this.apiService.post<any>('auth/revoke-token', body).subscribe({
+      next: () => this.clearLocalStorageAndRedirect(),
+      error: () => this.clearLocalStorageAndRedirect()
+    });
   }
 
   saveToken(token : string): void{
@@ -45,6 +51,12 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  private clearLocalStorageAndRedirect() {
+    // localStorage.removeItem('accessToken');
+    // localStorage.removeItem('refreshToken');
+     localStorage.removeItem(this.TOKEN_KEY);
+    this.router.navigate(['/login']);
+  }
   // isAuthenticated(): boolean {
   //   return !this.getToken();
   // }
