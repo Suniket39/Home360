@@ -21,9 +21,15 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .AllowAnyOrigin()
+                .WithOrigins(
+                    "http://localhost:4200",         // Your development computer
+                    "http://192.168.1.15:4200"       // Change this to your actual IoT device/computer IP
+                )
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyMethod()
+
+                // 2. CRITICAL: This allows the browser to accept and send the refresh token cookie
+                .AllowCredentials();
         });
 });
 

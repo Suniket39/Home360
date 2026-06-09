@@ -34,6 +34,7 @@ export class ApiService {
     data: T,
     params: QueryParams = {},
   ) : Observable<T>{
+    debugger
     return this.http.post(`${this.apiUrl}/${route}`, data) as Observable<T>;
   }
 
