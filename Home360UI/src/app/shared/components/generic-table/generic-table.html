@@ -1,0 +1,133 @@
+<div class="material-table-container">
+    <!-- @if(userAccessData?.canRead ?? true){ -->
+        <table class="material-table">
+            <thead class="table-head">
+                <tr>
+                    @for (col of columns ; track col.key; let i = $index) {
+                        @if(col.BlackListed){
+                            <th matTooltip="Is Blacklisted ?" 
+                                matTooltipClass="" class="text-center">
+                                <i class="pi pi-ban" style="color: #b04545;font-size: 0.8rem"></i>
+                            </th>
+                        }
+                        @else {
+                            @if(col.label === 'Action' && !(userAccessData?.canUpdate ?? true)){
+                            }
+                            @else {
+                                <th [class.sticky-column]="i === 1 && stickyColumn">{{ col.label }}</th>
+                            }
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (row of data; track row.index) {
+                <tr>
+                    @for (col of columns; track col.key; let i = $index) {
+                        @if(col.type === 'action'  && !(userAccessData?.canUpdate ?? true)){}
+                        @else{
+                            <td [class.sticky-column]="i === 1 && stickyColumn"> 
+                                @switch (col.type) {
+
+                                    @case ('index') {
+                                        {{ row[col.key] }}
+                                    }
+
+                                    @case ('date') {
+                                        {{ row[col.key] | date:'yyyy-MM-dd' }}
+                                    }
+
+                                    @case ('status') {
+                                        <span>
+                                            {{ row[col.key] ? 'Active' : 'Inactive' }}
+                                        </span>
+                                    }
+
+                                    @case ('badge') {
+                                        <span class="badge">
+                                            {{ row[col.key] ? 'Yes' : 'No' }}
+                                        </span>
+                                    }
+
+                                    @case('blacklisted'){
+                                        @if (row[col.key]) {
+                                            <span >Yes</span>
+                                        } @else {
+                                            <span class="">No</span>
+                                        }
+                                    }
+
+                                    @case('blacklistedValue'){
+                                        @if(row.isBlackListed){
+                                            <span >{{row[col.key]}}</span>
+                                        }
+                                        @else{
+                                            <span>{{row[col.key]}}</span>
+                                        }
+                                    }
+
+                                    @case('verification'){
+                                        @if (row[col.key]) {
+                                            <i class="pi pi-check" style="color: green; font-size: 0.6rem"></i>
+                                        } @else {
+                                            <i class="pi pi-minus" style="color: black; font-size: 0.4rem"></i>
+                                        }
+                                    }
+
+                                    @case ('action') {
+                                        <span
+                                            type="button"
+                                            class="text-centre edit-btn-icon"
+                                            matTooltip="Edit"
+                                            matTooltipClass="danger-tooltip"
+                                            (click)="action.emit({ type: 'edit', row: row.__original })">
+                                        <i class="far fa-edit edit-btn-icon"></i>
+                                        </span>
+                                    }
+
+                                    @default {
+                                        {{ row[col.key] }}
+                                    }
+                                }
+                            </td>
+                        }
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    <!-- } -->
+</div>
+<div class="row align-items-center mt-2">
+    <div class="d-flex justify-content-between align-items-center">
+
+        <!-- <div class="d-flex align-items-center">
+            @if(showPageSizeOption){
+                <div class="mr-1">
+                    <label>Page Size:</label>
+                    <select
+                        class="form-select pageSelect d-inline w-auto ms-2"
+                        [(ngModel)]="pageSize"
+                        (ngModelChange)="onPageSizeChange($event)">
+                        @for (item of pageSizeOptions; track item) {
+                        <option [value]="item">{{ item }}</option>
+                        }
+                    </select>
+                </div>
+                <span class="customFont">
+                    Showing {{ startIndex }} – {{ endIndex }} of {{ totalRecords }}
+                </span>
+            }
+        </div> -->
+
+        <!-- <div class="pagination justify-content-center">
+            <pagination-controls
+            [id]="paginationId"
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onPageChange($event)">
+            </pagination-controls>
+        </div> -->
+
+    </div>
+</div>

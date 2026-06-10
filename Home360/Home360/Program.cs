@@ -34,9 +34,9 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddDistributedMemoryCache();
+//builder.Services.AddDistributedMemoryCache();
 builder.Services.AddDataProtection();
-builder.Services.AddSession();
+//builder.Services.AddSession();
 
 builder.Services.AddAuthorization();
 
@@ -50,7 +50,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowAngular");
-app.UseSession();
+//app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

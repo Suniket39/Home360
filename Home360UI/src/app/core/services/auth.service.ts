@@ -34,11 +34,14 @@ export class AuthService {
     debugger
     this.isAuthenticated.set(false);
     var body ={
-      Token : localStorage.getItem(this.TOKEN_KEY)
+      
     }
     this.apiService.post<any>('auth/revoke-token', body).subscribe({
-      next: () => this.clearLocalStorageAndRedirect(),
-      error: () => this.clearLocalStorageAndRedirect()
+      next: (response) => { debugger
+      this.clearLocalStorageAndRedirect()},
+      error: (error) => {
+        debugger
+        this.clearLocalStorageAndRedirect()}
     });
   }
 

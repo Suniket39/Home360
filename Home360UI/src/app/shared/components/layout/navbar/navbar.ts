@@ -30,7 +30,6 @@ export class Navbar {
    }
 
    onLogout(){
-    debugger
     this.authService.logout();
    }
 }

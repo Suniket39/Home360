@@ -21,10 +21,8 @@ export class ApiService {
 
   get<T>(
     route: string,
-    skipAuth: boolean = false,
     params: QueryParams = {},
-    id: number | null,
-    method: 'get' | 'delete' = 'get'
+    id: number | null
   ) : Observable<T>{
     return this.http.get<T>(`${this.apiUrl}/${route}${id ? '/' + id: ''}`);
   }
