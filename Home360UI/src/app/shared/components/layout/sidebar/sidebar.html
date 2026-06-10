@@ -1,4 +1,4 @@
-<nav class="sidebar" [class.collapsed]="sidebar.collapsed()">
+<nav class="sidebar" [class.collapsed]="!sidebar.collapsed()">
   <div class="nav-body">
     @for (section of sidebar.navSections; track section.title) {
       <span class="section-label">{{ section.title }}</span>

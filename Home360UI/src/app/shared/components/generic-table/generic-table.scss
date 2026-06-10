@@ -1,0 +1,52 @@
+/* Material Design Table Styles */
+    .material-table-container {
+      width: 100%;
+      overflow-x: auto;
+      box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 
+                  0 1px 1px 0 rgba(0,0,0,0.14), 
+                  0 1px 3px 0 rgba(0,0,0,0.12);
+      border-radius: 4px;
+      margin: 20px 0;
+      background-color: #ffffff;
+    }
+
+    .material-table {
+      width: 100%;
+      border-collapse: collapse; /* Merges borders cleanly */
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    /* Header Styling */
+    .material-table thead tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .material-table th {
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.60);
+      padding: 16px 24px;
+      user-select: none;
+    }
+
+    /* Body Row & Cell Styling */
+    .material-table tbody tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      transition: background-color 0.2s ease; /* Smooth hover transition */
+    }
+
+    /* Hover State */
+    .material-table tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    /* Prevent border on last row */
+    .material-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .material-table td {
+      color: rgba(0, 0, 0, 0.87);
+      padding: 16px 24px;
+    }

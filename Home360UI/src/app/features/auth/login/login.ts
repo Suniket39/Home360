@@ -57,7 +57,7 @@ export class Login implements OnInit{
         error: (err) =>
         {
           debugger
-          this.toast.error('Error!', 'Something went wrong, please try again.',
+          this.toast.error('Error!', err.error,
             {
               duration: 10,
               progressBarDuration: 10,

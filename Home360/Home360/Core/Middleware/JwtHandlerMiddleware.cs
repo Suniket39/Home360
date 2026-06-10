@@ -55,9 +55,12 @@ namespace Home360.API.Core.Middleware
                 var userRoleMenuAccess = await _authService.GetUserRoleSpecificMenuAccess(userId);
                 var userAccess = userRoleMenuAccess.Item1;
 
-                context.Session.SetInt32("UserId", userId);
-                context.Session.SetString("UserName", userName);
-                context.Items["UserAccess"]= userAccess;
+                context.Items["UserId"] = userId;
+                context.Items["UserName"] = userName;
+                context.Items["UserAccess"] = userAccess;
+                //context.Session.SetInt32("UserId", userId);
+                //context.Session.SetString("UserName", userName);
+                //context.Items["UserAccess"]= userAccess;
             }
             catch(Exception ex) 
             {
