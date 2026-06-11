@@ -1,19 +1,19 @@
-import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import { ApiService } from '../../../core/services/api.service';
 import { CommonModule } from '@angular/common';
 import { GenericTable } from '../../../shared/components/generic-table/generic-table';
-
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: 'app-user',
-  imports: [MatTableModule, CommonModule, GenericTable ],
+  imports: [MatTableModule, CommonModule, MatButtonModule, MatIconModule, GenericTable, MatInputModule],
   templateUrl: './user.html',
   styleUrl: './user.scss',
 })
 export class User implements OnInit {
-
-  // allUsers : any[] = [];
   allUsers = signal<any[]>([]);
 
     // Pagination
@@ -29,8 +29,7 @@ export class User implements OnInit {
   totalRecords: number = 0;
   paginationId = 'users';
 
-  constructor(private apiService : ApiService,
-    private cdr: ChangeDetectorRef
+  constructor(private apiService : ApiService
   ) {
     
   }
@@ -43,10 +42,7 @@ export class User implements OnInit {
 
     this.apiService.get<any>('UserManager/allUsers', {}, null).subscribe({
       next: (response) => {
-        debugger
-        // this.allUsers = this.prepareTableData(response);
-         this.allUsers.set(this.prepareTableData(response));
-        // this.cdr.markForCheck();
+        this.allUsers.set(this.prepareTableData(response));
       },
       error: (error) =>{
         debugger
