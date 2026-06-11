@@ -10,6 +10,6 @@ export const routes: Routes = [
     { path: 'login', component : Login},
     { path: 'form', component : FormCard},
     { path: 'dashboard', component : GlobalDashboard, canActivate: [authGuard]},
-    { path: 'users', component : User},
+    { path: 'users', component : User, canActivate: [authGuard]},
     
 ];
