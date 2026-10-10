@@ -1,9 +1,27 @@
+
+<section>
+    <div class="title-label">User Manager</div>
+    <div class="example-button-row">
+        <div class="example-flex-container">
+            <mat-form-field  class="example-full-width">
+            <input type="text" matInput placeholder="Ex. John" />
+          </mat-form-field>
+            <button mat-mini-fab disabled aria-label="Example icon button with a heart icon">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-mini-fab aria-label="Example icon button with a delete icon">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</section>
+
 <app-generic-table 
-                    [columns]="columns"
-                    [data]="allUsers()"
-                    [pageSize]="pageSize"
-                    [currentPage]="currentActivePage"
-                    [totalRecords]="totalRecords"
-                    [paginationId]="paginationId"
-                >
-                </app-generic-table>
+    [columns]="columns"
+    [data]="allUsers()"
+    [pageSize]="pageSize"
+    [currentPage]="currentActivePage"
+    [totalRecords]="totalRecords"
+    [paginationId]="paginationId"
+>
+</app-generic-table>
